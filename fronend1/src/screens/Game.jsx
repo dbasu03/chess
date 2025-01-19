@@ -93,8 +93,11 @@ const Game = () => {
       switch (message.type) {
         case INIT_GAME:
           setChess(new Chess());
+          const chess= new Chess();
           setBoard(new Chess().board());
           console.log('Game initialized');
+          console.log(chess.board());
+
           break;
         case MOVE:
           const move = message.payload;
@@ -115,12 +118,12 @@ const Game = () => {
 
   return (
     <div className="justify-center flex">
-      <div className="pt-8 max-w-screen-lg">
+      <div className="pt-8 max-w-screen-lg ">
         <div className="grid grid-cols-6 gap-4 md:grid-cols-2">
           <div className="col-span-4 bg-red-200">
-            <ChessBoard board={board} />
+            <ChessBoard chess={chess} setBoard={setBoard } socket ={socket} board={board} />
           </div>
-          <div className="col-span-2 bg-green-200">
+          <div className="col-span-2 bg-green-200 ">
             <button
               onClick={() => {
                 socket.send(
